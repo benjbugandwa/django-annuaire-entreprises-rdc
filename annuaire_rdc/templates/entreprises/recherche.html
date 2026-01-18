@@ -1,0 +1,69 @@
+{% extends "entreprises/base.html" %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Rechercher une entreprise</h1>
+
+<div class="card bg-base-100 shadow mb-6">
+    <div class="card-body">
+
+        <h1 class="text-2xl font-bold mb-4 text-center">
+            Trouver une entreprise
+        </h1>
+
+<form 
+    method="get" 
+    hx-get="{% url 'recherche' %}"
+    hx-trigger="keyup changed delay:300ms"
+    hx-target="#resultats"
+    hx-indicator="#loader"
+    hx-swap="innerHTML"
+    class="flex flex-col md:flex-row gap-2 mb-6"
+    >
+    
+    
+    
+    <input
+        type="text"
+        name="q"
+        value="{{ query }}"
+        placeholder="Nom, secteur, adresse..."
+        class="input input-bordered w-full"
+        autocomplete="off"
+
+        hx-get="{% url 'recherche' %}"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#resultats"
+        hx-swap="innerHTML"
+    >
+    <button class="btn btn-primary">Rechercher</button>
+</form>
+<div id="loader" class="htmx-indicator text-center mt-2">
+    <span class="loading loading-spinner loading-sm"></span>
+</div>
+
+
+{% if entreprises %}
+<div class="mt-6">
+
+
+   <div id="resultats"
+       
+   >
+        {% include "entreprises/_resultats.html" %}
+    </div>
+
+
+
+
+</div>
+
+
+
+{% else %}
+<p class="text-gray-500">Aucune entreprise trouvée.</p>
+{% endif %}
+
+{% endblock %}

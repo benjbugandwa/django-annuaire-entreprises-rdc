@@ -1,0 +1,95 @@
+{% extends "entreprises/base.html" %}
+
+{% block title %}{{ entreprise.denomination }}{% endblock %}
+
+{% block content %}
+
+<!-- Carte principale -->
+<div class="card bg-base-100 shadow-xl">
+
+    <!-- Image entreprise -->
+    {% if entreprise.photo %}
+    <figure class="h-64 bg-base-200">
+        <img src="{{ entreprise.photo.url }}"
+             alt="{{ entreprise.denomination }}"
+             class="object-contain h-full mx-auto">
+    </figure>
+    {% endif %}
+
+    <div class="card-body">
+
+        <!-- Nom + secteur -->
+        <h1 class="text-3xl font-bold">
+            {{ entreprise.denomination }}
+        </h1>
+
+        <p class="text-lg text-gray-400">
+            {{ entreprise.secteursactivites }}
+        </p>
+
+        <!-- Bouton WhatsApp -->
+        <div class="mt-4">
+            <a href="{{ entreprise.whatsapp_link }}"
+               target="_blank"
+               class="btn btn-success btn-lg w-full md:w-auto">
+                Contacter via WhatsApp
+            </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Infos clés -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+
+            <div>
+                <strong>📍 Adresse :</strong><br>
+                {{ entreprise.adresse }}
+            </div>
+
+            <div>
+                <strong>📞 Téléphone :</strong><br>
+                {{ entreprise.telephone }}
+            </div>
+
+            <div>
+                <strong>📧 Email :</strong><br>
+                <a href="mailto:{{ entreprise.email }}" class="link">
+                    {{ entreprise.email }}
+                </a>
+            </div>
+
+            {% if entreprise.siteweb %}
+            <div>
+                <strong>🌐 Site web :</strong><br>
+                <a href="{{ entreprise.siteweb }}" target="_blank" class="link">
+                    {{ entreprise.siteweb }}
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Description -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">
+                À propos de l’entreprise
+            </h2>
+
+            <p class="leading-relaxed whitespace-pre-line">
+                {{ entreprise.description }}
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bouton retour -->
+<div class="mt-6 text-center">
+    <a href="/" class="btn btn-outline">
+        ← Retour à la recherche
+    </a>
+</div>
+
+{% endblock %}

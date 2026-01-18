@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Annuaire PME{% endblock %}</title>
+
+    <!-- Tailwind + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body data-theme="winter" class="min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    {% load static %}
+
+<div class="navbar bg-base-100 shadow-md px-4">
+    <div class="flex-1 flex items-center gap-2">
+        <img src="{% static 'img/logo.png' %}"
+             alt="Logo"
+             class="w-8 h-8">
+
+        <a href="/" class="text-xl font-bold">
+            Annuaire PME
+        </a>
+    </div>
+</div>
+
+    <!-- Contenu principal -->
+    <main class="flex-grow">
+        <div class="max-w-6xl mx-auto px-4 py-6">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+
+<footer class="bg-base-300 text-base-content mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-center text-sm">
+
+        <p>
+            © {{ now|date:"Y" }} Annuaire PME — Tous droits réservés
+        </p>
+
+        <p class="mt-2">
+            Développé avec ❤️ en Django & DaisyUI
+        </p>
+
+    </div>
+</footer>
+<script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</body>
+</html>

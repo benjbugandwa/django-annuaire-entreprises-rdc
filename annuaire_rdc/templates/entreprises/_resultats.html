@@ -1,0 +1,66 @@
+<div class="flex flex-wrap gap-4">
+
+
+
+
+{% for entreprise in entreprises %}
+<div class="card bg-base-100 w-96 shadow-sm">
+  
+  <!-- IMAGE -->
+  {% if entreprise.photo %}
+  <figure class="px-10 pt-10">
+    <img
+       src="{{ entreprise.photo.url }}"
+       alt="{{ entreprise.denomination }}"
+      class="rounded-xl" />
+  </figure>
+  {% else %}
+	<figure class="h-48 flex items-center justify-center bg-base-200">
+        <span class="text-sm opacity-50">Aucune image</span>
+    </figure>
+  {% endif %}
+  
+  
+  <div class="card-body items-center text-center">
+  
+  <!-- DENOMINATION -->
+    <h2 class="card-title">{{ entreprise.denomination }}</h2>
+	
+	<!-- DESCRIPTION -->
+    <p>{{ entreprise.description|truncatechars:120 }}</p>
+	
+	
+	 <!-- BOUTONS -->
+    <div class="card-actions">
+       <a
+                href="{% url 'entreprise_detail' entreprise.id %}"
+                class="btn btn-outline btn-sm"
+            >
+                Détails
+            </a>
+
+            <a
+                href="{{ entreprise.whatsapp_link }}"
+                target="_blank"
+                class="btn btn-success btn-sm"
+            >
+                WhatsApp
+            </a>
+    </div>
+	
+	
+	
+  </div>
+  
+  
+</div>
+{% empty %}
+<p class="col-span-full text-center opacity-50">
+    Aucun résultat trouvé
+</p>
+{% endfor %}
+
+
+
+
+</div>
